@@ -1,5 +1,7 @@
 # SupportHub Admin
 
+**Live Demo:** [supporthub-admin.vercel.app](https://supporthub-admin.vercel.app/)
+
 `@jyh-dev/kit`을 실제 관리자 콘솔 흐름에 적용해보기 위해 만든 고객문의 헬프데스크 샘플입니다.
 
 문의 목록, 검색/필터, 페이지네이션, 상세 조회, 답변 작성, 첨부파일 업로드, 상태 변경, 일괄 처리, 삭제된 문의 보관, 대시보드, 긴급 문의 알림 흐름에 적용해 보았습니다.
