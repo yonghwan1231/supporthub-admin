@@ -24,6 +24,7 @@ export function DeletedTicketListPage() {
   const { data, error, isError, isLoading } =
     deletedTicketService.queries.useGetDeletedTickets({
       enabled: Boolean(password),
+      placeholderData: (previousData) => previousData,
       retry: false,
       variables: {
         page: search.state.page,

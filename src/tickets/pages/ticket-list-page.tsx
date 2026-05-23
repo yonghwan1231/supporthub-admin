@@ -93,6 +93,7 @@ export function TicketListPage() {
     bulkStatus: "in_progress" as $Ticket.Status,
   });
   const { data, isLoading, isFetching } = ticketService.queries.useGetTickets({
+    placeholderData: (previousData) => previousData,
     variables: search.state,
   });
 
