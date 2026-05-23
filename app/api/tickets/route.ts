@@ -1,9 +1,13 @@
-import { getTicketsSearchParamsSchema } from "@/tickets/schema/ticket.schemas";
+import {
+  createTicketSchema,
+  getTicketsSearchParamsSchema,
+} from "@/tickets/schema/ticket.schemas";
 import { errorResponse, ok } from "../_lib/api-response";
+import { publishUrgentTicket } from "../realtime/_lib/ticket-events";
 import {
   ensureSeedTickets,
   getTicketCollection,
-  toTicket
+  toTicket,
 } from "./_lib/ticket-db";
 import type { TicketDocument } from "./_lib/ticket-db";
 import type { Filter, Sort } from "mongodb";
@@ -52,6 +56,42 @@ export async function GET(request: Request) {
   }
 }
 
+export async function POST(request: Request) {
+  try {
+    const body = createTicketSchema.parse(await request.json());
+    const collection = await getTicketCollection();
+    const now = new Date().toISOString();
+    const ticketDocument: TicketDocument = {
+      title: body.title,
+      content: body.content,
+      customerName: body.customerName,
+      customerEmail: body.customerEmail,
+      status: "open",
+      priority: body.priority,
+      priorityWeight: getPriorityWeight(body.priority),
+      category: body.category,
+      tags: body.tags,
+      attachments: [],
+      replies: [],
+      createdAt: now,
+      updatedAt: now,
+    };
+    const result = await collection.insertOne(ticketDocument);
+    const ticket = toTicket({
+      ...ticketDocument,
+      _id: result.insertedId,
+    });
+
+    if (ticket.priority === "urgent") {
+      publishUrgentTicket(ticket);
+    }
+
+    return ok(ticket, { status: 201 });
+  } catch (error) {
+    return errorResponse(error);
+  }
+}
+
 function createListFilter(
   params: $Ticket.GetTicketsParams,
 ): Filter<TicketDocument> {
@@ -86,4 +126,15 @@ function createSort(sort: $Ticket.GetTicketsParams["sort"]): Sort {
 
 function escapeRegex(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function getPriorityWeight(priority: $Ticket.Priority) {
+  const weight: Record<$Ticket.Priority, number> = {
+    low: 1,
+    medium: 2,
+    high: 3,
+    urgent: 4,
+  };
+
+  return weight[priority];
 }

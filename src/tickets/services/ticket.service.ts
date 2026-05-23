@@ -47,6 +47,16 @@ export const ticketService = createQueryService({
       invalidates: ({ keys }) => [keys.list.getTickets()],
     }),
 
+    createTicket: mutation({
+      fn: async (payload: $Ticket.CreateTicketPayload) => {
+        return apiClient.post<$Ticket.CreateTicketResponse>(
+          "/api/tickets",
+          payload,
+        );
+      },
+      invalidates: ({ keys }) => [keys.list.getTickets()],
+    }),
+
     addReply: mutation({
       fn: async ({ ticketId, ...payload }: $Ticket.AddReplyPayload) => {
         return apiClient.post<$Ticket.AddReplyResponse>(

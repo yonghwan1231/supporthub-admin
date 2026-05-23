@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>
+      <body className="overflow-hidden">
         <AppProviders>
           <AppShell>{children}</AppShell>
         </AppProviders>

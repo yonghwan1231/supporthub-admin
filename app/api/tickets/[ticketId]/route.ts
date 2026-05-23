@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { updateTicketStatusSchema } from "@/tickets/schema/ticket.schemas";
 import { errorResponse, ok } from "../../_lib/api-response";
 import {
+  createDeletedTicketDocument,
+  getDeletedTicketCollection,
+} from "../../admin/deleted-tickets/_lib/deleted-ticket-db";
+import {
   ensureSeedTickets,
   getTicketCollection,
   toObjectId,
@@ -70,7 +74,19 @@ export async function DELETE(_request: Request, context: RouteContext) {
   try {
     const { ticketId } = await context.params;
     const collection = await getTicketCollection();
-    const result = await collection.deleteOne({ _id: toObjectId(ticketId) });
+    const _id = toObjectId(ticketId);
+    const ticketDocument = await collection.findOne({ _id });
+
+    if (!ticketDocument) {
+      return ok({ deleted: false });
+    }
+
+    const deletedTicketCollection = await getDeletedTicketCollection();
+    await deletedTicketCollection.insertOne(
+      createDeletedTicketDocument(toTicket(ticketDocument)),
+    );
+
+    const result = await collection.deleteOne({ _id });
 
     return ok({ deleted: result.deletedCount > 0 });
   } catch (error) {

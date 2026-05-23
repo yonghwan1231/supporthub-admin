@@ -4,6 +4,9 @@ import importPlugin from "eslint-plugin-import";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 
 const config = [
+  {
+    ignores: ["storybook-static/**"],
+  },
   ...nextVitals,
   ...nextTypescript,
   {
@@ -25,19 +28,6 @@ const config = [
       "import/consistent-type-specifier-style": [
         "error",
         "prefer-top-level",
-      ],
-      "object-curly-newline": [
-        "error",
-        {
-          ExportDeclaration: {
-            minProperties: 4,
-            multiline: true,
-          },
-          ImportDeclaration: {
-            minProperties: 4,
-            multiline: true,
-          },
-        },
       ],
       "object-curly-spacing": ["error", "always"],
       "simple-import-sort/exports": "error",

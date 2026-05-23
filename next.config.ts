@@ -5,6 +5,7 @@ import type { NextConfig } from "next";
 const appRoot = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
+  reactStrictMode: false,
   output: "standalone",
   turbopack: {
     root: appRoot,

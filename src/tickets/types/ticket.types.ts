@@ -77,6 +77,18 @@ declare global {
       status: string;
     };
 
+    type CreateTicketPayload = {
+      title: string;
+      content: string;
+      customerName: string;
+      customerEmail: string;
+      category: Category;
+      priority: Priority;
+      tags: string[];
+    };
+
+    type CreateTicketResponse = GetTicketsItem;
+
     type AddReplyPayload = {
       ticketId: string;
       message: string;
@@ -101,6 +113,19 @@ declare global {
       uploadUrl: string;
       fileUrl: string;
       key: string;
+    };
+
+    type UrgentTicketEvent = {
+      category: Category;
+      createdAt: string;
+      customerName: string;
+      id: string;
+      priority: Priority;
+      title: string;
+    };
+
+    type RealtimeEvents = {
+      "ticket.urgent": UrgentTicketEvent;
     };
   }
 }

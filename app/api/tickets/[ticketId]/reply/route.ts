@@ -27,7 +27,7 @@ export async function POST(request: Request, context: RouteContext) {
         $push: {
           replies: {
             id: crypto.randomUUID(),
-            authorName: "Support",
+            authorName: "지원팀",
             message: body.message,
             attachments: body.attachments,
             createdAt: now,

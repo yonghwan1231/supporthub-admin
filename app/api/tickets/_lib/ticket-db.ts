@@ -25,6 +25,17 @@ export async function ensureSeedTickets() {
   await collection.insertMany(seedTickets);
 }
 
+export async function resetTicketCollection() {
+  const collection = await getTicketCollection();
+  const deleteResult = await collection.deleteMany({});
+  const insertResult = await collection.insertMany(seedTickets);
+
+  return {
+    deletedCount: deleteResult.deletedCount,
+    insertedCount: insertResult.insertedCount,
+  };
+}
+
 export function toObjectId(id: string) {
   if (!ObjectId.isValid(id)) {
     throw new Error("Invalid ticket id.");

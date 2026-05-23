@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { createPromiseModal } from "@jyh-dev/kit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ProjectIntroModal } from "@/common/components/layout/project-intro-modal";
+import { appModal } from "@/common/modals/app-modal";
+import { UrgentTicketNotifier } from "@/tickets/components/urgent-ticket-notifier";
 import "@/common/lib/react-global";
-
-export const appModal = createPromiseModal({});
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(
@@ -13,7 +13,8 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 1000 * 20,
+            staleTime: 0,
+            gcTime: 0,
             refetchOnWindowFocus: false,
           },
         },
@@ -25,12 +26,14 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
       <appModal.Provider
         defaultOptions={{
           classNames: {
-            panel: "max-w-lg",
+            panel: "w-auto",
             button: "min-w-20",
           },
         }}
       >
         {children}
+        <ProjectIntroModal />
+        <UrgentTicketNotifier />
       </appModal.Provider>
     </QueryClientProvider>
   );

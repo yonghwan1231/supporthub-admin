@@ -26,37 +26,39 @@ export function TicketTable({
   return (
     <Table.Root
       classNames={{
-        root: "rounded-md border border-line bg-panel overflow-hidden",
-        table: "min-w-[1040px] table-fixed text-left",
-        head: "bg-slate-50 text-xs font-bold uppercase text-muted",
-        row: "hover:bg-blue-50/40",
-        cell: "px-4 py-2",
-        header: "px-4 py-3",
+        root: "h-full bg-panel",
+        head: "sticky top-0 z-10 bg-slate-50 text-xs text-muted shadow-[0_1px_0_0_#e2e8f0]",
+        header: "py-2.5 h-auto",
+        cell: "py-2.5 h-auto",
+        skeletonRow: "h-auto p-0",
+        skeletonBar: "h-3",
+        skeletonCell: "h-auto p-4",
       }}
-      colgroup={[52, "auto", 136, 136, 136, 120]}
+      colgroup={[52, 80, "auto", 100, 100, 100, 180]}
       emptyMessage="조건에 맞는 문의가 없습니다."
       isEmpty={!isLoading && tickets.length === 0}
       isLoading={isLoading}
       skeletonRowCount={10}
     >
       <Table.Head>
-        <Table.Row>
-          <Table.Header>
+        <Table.Row withDivider={false}>
+          <Table.Header align="center">
             <HeaderCheckbox
               checked={scope.isAllSelected}
               indeterminate={scope.isIndeterminate}
               onChange={() => selection.toggleAll()}
             />
           </Table.Header>
+          <Table.Header>분류</Table.Header>
           <Table.Header>문의</Table.Header>
+          <Table.Header>이름</Table.Header>
           <Table.Header>상태</Table.Header>
           <Table.Header>우선순위</Table.Header>
-          <Table.Header>분류</Table.Header>
           <Table.Header>업데이트</Table.Header>
         </Table.Row>
       </Table.Head>
 
-      <Table.Body isLoading={isLoading}>
+      <Table.Body>
         {tickets.map((ticket) => (
           <Table.Row
             interactive
@@ -64,34 +66,26 @@ export function TicketTable({
             onClick={() => router.push(`/tickets/${ticket.id}`)}
             selected={selection.includes(ticket.id)}
           >
-            <Table.Cell truncate={false}>
+            <Table.Cell truncate={false} align="center">
               <input
                 aria-label={`${ticket.title} 선택`}
                 checked={selection.includes(ticket.id)}
-                className="h-4 w-4 rounded border-slate-300 text-cyan-600 focus:ring-cyan-500"
+                className="h-4 w-4 rounded border-slate-300 text-cyan-600 focus:ring-cyan-500 align-sub"
                 onChange={() => selection.toggle(ticket.id)}
                 onClick={(event) => event.stopPropagation()}
                 type="checkbox"
               />
             </Table.Cell>
-            <Table.Cell truncate={false}>
-              <div>
-                <p className="line-clamp-1 font-bold text-ink">
-                  {ticket.title}
-                </p>
-                <p className="mt-1 text-xs text-muted">
-                  {ticket.customerName} · {ticket.customerEmail}
-                </p>
-              </div>
+            <Table.Cell>
+              <CategoryBadge category={ticket.category} />
             </Table.Cell>
+            <Table.Cell>{ticket.title}</Table.Cell>
+            <Table.Cell>{ticket.customerName}</Table.Cell>
             <Table.Cell>
               <StatusBadge status={ticket.status} />
             </Table.Cell>
             <Table.Cell>
               <PriorityBadge priority={ticket.priority} />
-            </Table.Cell>
-            <Table.Cell>
-              <CategoryBadge category={ticket.category} />
             </Table.Cell>
             <Table.Cell>
               <span className="text-xs font-semibold text-muted">

@@ -1,5 +1,6 @@
 "use client";
 
+import { useId } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   useAsyncAction,
@@ -12,6 +13,7 @@ import { Paperclip, Send, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/common/components/ui/button";
 import { Textarea } from "@/common/components/ui/field";
+import { cn } from "@/common/lib/cn";
 import { formatFileSize } from "@/common/lib/format";
 import { replyFormSchema } from "@/tickets/schema/ticket.schemas";
 import { ticketService } from "@/tickets/services/ticket.service";
@@ -20,6 +22,7 @@ import type { ReplyFormValues } from "@/tickets/schema/ticket.schemas";
 export function ReplyComposer({ ticketId }: { ticketId: string }) {
   const modal = usePromiseModal();
   const addReply = ticketService.mutations.useAddReply();
+  const fileInputId = useId();
   const form = useForm<ReplyFormValues>({
     resolver: zodResolver(replyFormSchema),
     defaultValues: {
@@ -126,7 +129,7 @@ export function ReplyComposer({ ticketId }: { ticketId: string }) {
 
   return (
     <form
-      className="rounded-md border border-line bg-panel p-5 shadow-sm"
+      className="rounded-md border border-line bg-panel p-5"
       onSubmit={onSubmit}
     >
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
@@ -169,11 +172,18 @@ export function ReplyComposer({ ticketId }: { ticketId: string }) {
       </div>
 
       <div className="mt-4 rounded-md border border-dashed border-line bg-slate-50 p-4">
-        <label className="inline-flex cursor-pointer items-center gap-2 rounded-md bg-white px-3 py-2 text-sm font-bold text-slate-700 ring-1 ring-slate-200 transition hover:bg-slate-100">
+        <label
+          aria-disabled={Boolean(uploader.inputProps.disabled)}
+          className={cn(
+            "inline-flex cursor-pointer items-center gap-2 rounded-md bg-white px-3 py-2 text-sm font-bold text-slate-700 ring-1 ring-slate-200 transition hover:bg-slate-100",
+            uploader.inputProps.disabled && "pointer-events-none opacity-60",
+          )}
+          htmlFor={fileInputId}
+        >
           <Paperclip className="h-4 w-4" />
           파일 첨부
-          <input className="sr-only" {...uploader.inputProps} />
         </label>
+        <input id={fileInputId} hidden {...uploader.inputProps} />
 
         {uploader.items.length > 0 ? (
           <ul className="mt-4 space-y-2">
