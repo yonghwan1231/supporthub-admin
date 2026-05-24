@@ -70,7 +70,7 @@ export function DeletedTicketDetailPage({
           />
           <section className="rounded-md border border-line bg-panel p-6">
             <h2 className="text-lg font-bold text-ink">삭제 보관 정보</h2>
-            <dl className="mt-5 grid gap-3 text-sm md:grid-cols-2">
+            <dl className="mt-5 grid gap-3 text-sm grid-cols-2">
               <InfoItem label="삭제 보관 ID" value={deletedTicket.id} />
               <InfoItem label="원본 문의 ID" value={deletedTicket.originalId} />
               <InfoItem

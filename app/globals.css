@@ -73,7 +73,7 @@ button:disabled {
 }
 
 .page {
-  @apply flex min-h-0 grow flex-col gap-5 py-8 px-[max(2rem,calc((100%-1632px)/2))];
+  @apply flex min-h-0 grow flex-col gap-5 py-8  px-[max(2rem,calc((100%-1632px)/2))];
 }
 
 @property --rainbow-border-angle {

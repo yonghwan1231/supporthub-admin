@@ -55,7 +55,7 @@ const fields: ListFilterField<keyof TicketFilterValues & string>[] = [
     type: "select",
   },
   {
-    className: "lg:min-w-80",
+    className: "min-w-80",
     label: "Search",
     name: "keyword",
     placeholder: "제목, 고객명, 이메일, 태그 검색",

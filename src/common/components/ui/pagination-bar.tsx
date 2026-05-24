@@ -18,7 +18,7 @@ export function PaginationBar({
   totalCount: number;
 }) {
   return (
-    <div className="flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="flex gap-3 px-4 py-4 items-center justify-between">
       <p className="text-sm text-muted">
         총 <span className="font-bold text-ink">{totalCount}</span>건
       </p>

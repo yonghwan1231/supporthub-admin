@@ -51,7 +51,7 @@ export function DeletedTicketListPage() {
 
   return (
     <section className="page">
-      <header className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <header className="flex gap-4 flex-row items-end justify-between">
         <div>
           <h1 className="text-3xl font-bold text-ink">삭제된 문의</h1>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">

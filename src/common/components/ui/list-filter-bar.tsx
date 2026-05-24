@@ -57,7 +57,7 @@ export function ListFilterBar<
         onSubmit();
       }}
     >
-      <div className="flex flex-col gap-3 lg:flex-row">
+      <div className="flex gap-3">
         {fields.map((field) => (
           <FilterControl
             field={field}
@@ -101,7 +101,7 @@ function FilterControl<
 }) {
   const fieldValue = String(value[field.name] ?? "");
   const wrapperClassName = cn(
-    field.type === "search" ? "min-w-0 flex-1" : "w-full sm:w-40 lg:w-32",
+    field.type === "search" ? "min-w-0 flex-1" : "w-32",
     field.className,
   );
 

@@ -68,7 +68,7 @@ export function DashboardPage() {
 
   return (
     <section className="page inner overflow-auto">
-      <header className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <header className="flex gap-4 items-end justify-between">
         <div>
           <h1 className="text-3xl font-semibold text-ink">대시보드</h1>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
@@ -88,7 +88,7 @@ export function DashboardPage() {
         </section>
       ) : null}
 
-      <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+      <section className="grid gap-3 grid-cols-4">
         <MetricCard
           description="최근 24시간 기준"
           icon={Inbox}
@@ -120,7 +120,7 @@ export function DashboardPage() {
         />
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(360px,0.65fr)]">
+      <section className="grid gap-4 grid-cols-[minmax(0,1.35fr)_minmax(360px,0.65fr)]">
         <DashboardPanel
           description="최근 7일 기준"
           title="문의 유입 및 해결 추이"
@@ -182,7 +182,7 @@ export function DashboardPage() {
         </div>
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-2">
+      <section className="grid gap-4 grid-cols-2">
         <DashboardPanel description="최신 접수 순" title="최근 문의">
           <div className="overflow-hidden rounded-md border border-line">
             <table className="w-full text-sm">

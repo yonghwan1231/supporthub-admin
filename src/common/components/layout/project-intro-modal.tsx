@@ -101,7 +101,7 @@ export function ProjectIntroModal() {
 
           <section>
             <h3 className="text-sm font-extrabold text-ink">기술 스택</h3>
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            <div className="mt-3 grid gap-2 grid-cols-2">
               {techStacks.map((stack) => (
                 <div
                   className="flex items-center gap-2 rounded-md bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700"
@@ -115,7 +115,7 @@ export function ProjectIntroModal() {
           </section>
         </ModalFrame.Body>
 
-        <ModalFrame.Footer className="flex-col gap-3  sm:flex-row sm:items-center sm:justify-between">
+        <ModalFrame.Footer className="gap-3 flex items-center justify-between">
           <label className="flex items-center gap-2 text-sm font-semibold text-slate-600">
             <input
               checked={hideToday}
@@ -126,7 +126,7 @@ export function ProjectIntroModal() {
             오늘 하루 보지 않기
           </label>
 
-          <Button className="sm:w-24" onClick={close} type="button">
+          <Button className="w-24" onClick={close} type="button">
             확인
           </Button>
         </ModalFrame.Footer>

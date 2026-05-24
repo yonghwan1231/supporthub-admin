@@ -6,7 +6,7 @@ export function DashboardSkeleton() {
         <SkeletonBlock className="h-5 w-full max-w-xl" />
       </header>
 
-      <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+      <section className="grid gap-3 grid-cols-4">
         {Array.from({ length: 4 }).map((_, index) => (
           <article
             className="rounded-md border border-line bg-panel p-4"
@@ -24,7 +24,7 @@ export function DashboardSkeleton() {
         ))}
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(360px,0.65fr)]">
+      <section className="grid gap-4 grid-cols-[minmax(0,1.35fr)_minmax(360px,0.65fr)]">
         <DashboardPanelShell>
           <PanelHeaderSkeleton />
           <div className="p-4">
@@ -72,7 +72,7 @@ export function DashboardSkeleton() {
         </div>
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-2">
+      <section className="grid gap-4 grid-cols-2">
         <DashboardPanelShell>
           <PanelHeaderSkeleton />
           <div className="p-4">

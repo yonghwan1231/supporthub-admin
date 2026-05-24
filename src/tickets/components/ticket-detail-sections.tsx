@@ -19,7 +19,7 @@ export function TicketSummaryCard({
 }) {
   return (
     <article className="rounded-md border border-line bg-panel p-6">
-      <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+      <div className="flex gap-5 items-start justify-between">
         <div>
           <div className="flex flex-wrap gap-2">
             <StatusBadge status={ticket.status} />
@@ -75,7 +75,7 @@ export function TicketReplyHistory({ replies }: { replies: $Ticket.Reply[] }) {
                 {reply.message}
               </p>
               {reply.attachments.length > 0 ? (
-                <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                <ul className="mt-4 grid gap-2 grid-cols-2">
                   {reply.attachments.map((attachment) => (
                     <li key={attachment.id}>
                       <a

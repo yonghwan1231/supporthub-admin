@@ -1,13 +1,11 @@
-import { FolderGit, PackageCheck } from "lucide-react";
-import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 import { AdminMenu } from "@/common/components/layout/admin-menu";
 import { SidebarNav } from "@/common/components/layout/sidebar-nav";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen overflow-hidden bg-canvas">
-      <aside className="hidden w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950 text-white lg:flex">
+    <div className="flex h-screen overflow-hidden bg-canvas min-w-7xl">
+      <aside className="w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-950 text-white flex">
         <div className="border-b border-white/10 px-6 py-6">
           <h1 className="text-xl font-bold uppercase">SupportHub admin</h1>{" "}
           <p className="mt-1 text-xs font-semibold  text-blue-200">
@@ -33,17 +31,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-        <header className="shrink-0 border-b border-line bg-white/95 px-4 py-3 backdrop-blur sm:px-6 lg:px-8">
+        <header className="shrink-0 border-b border-line bg-white/95 px-4  backdrop-blur px-8">
           <div className="mx-auto flex items-center justify-between gap-3">
-            <Link
-              className="flex items-center gap-2 lg:hidden"
-              href="/dashboard"
-            >
-              <span className="grid h-9 w-9 place-items-center rounded-md bg-slate-950 text-white">
-                <PackageCheck size={18} />
-              </span>
-              <span className="text-sm font-bold text-ink">SupportHub</span>
-            </Link>
             <AdminMenu />
           </div>
         </header>

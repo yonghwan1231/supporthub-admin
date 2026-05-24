@@ -132,7 +132,7 @@ export function ReplyComposer({ ticketId }: { ticketId: string }) {
       className="rounded-md border border-line bg-panel p-5"
       onSubmit={onSubmit}
     >
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex gap-2 items-center justify-between">
         <div>
           <h2 className="text-lg font-bold text-ink">답변 작성</h2>
           <p className="mt-1 text-sm text-muted">

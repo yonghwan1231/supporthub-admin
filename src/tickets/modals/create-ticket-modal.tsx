@@ -71,7 +71,7 @@ export function CreateTicketModal({
           <form className="flex min-h-0 flex-1 flex-col gap-4">
             <FieldError message={form.formState.errors.root?.message} />
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 grid-cols-2">
               <label>
                 <FieldLabel>고객명</FieldLabel>
                 <Input
@@ -108,7 +108,7 @@ export function CreateTicketModal({
               <FieldError message={form.formState.errors.title?.message} />
             </label>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 grid-cols-2">
               <label>
                 <FieldLabel>분류</FieldLabel>
                 <Select

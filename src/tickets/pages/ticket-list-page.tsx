@@ -57,7 +57,7 @@ const ticketFilterFields: ListFilterField<
     type: "select",
   },
   {
-    className: "lg:min-w-80",
+    className: "min-w-80",
     label: "Search",
     name: "keyword",
     placeholder: "제목, 고객명, 이메일, 태그 검색",
@@ -158,7 +158,7 @@ export function TicketListPage() {
 
   return (
     <section className="page">
-      <header className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <header className="flex gap-4 flex-row items-end justify-between">
         <div>
           <h1 className="text-3xl font-bold text-ink">고객 문의 관리</h1>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
@@ -184,7 +184,7 @@ export function TicketListPage() {
       />
 
       {selection.count > 0 && (
-        <section className="flex flex-col gap-3 rounded-md bg-brand/10 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+        <section className="flex gap-3 rounded-md bg-brand/10 px-4 py-3 items-center justify-between">
           <p className="text-sm text-ink font-semibold">
             {selection.count}개 선택
           </p>
