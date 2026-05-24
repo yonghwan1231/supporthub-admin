@@ -13,6 +13,7 @@ import Link from "next/link";
 import { formatDateTime } from "@/common/lib/format";
 import { dashboardService } from "@/dashboard/services/dashboard.service";
 import { PriorityBadge, StatusBadge } from "@/tickets/components/ticket-badges";
+import { DashboardSkeleton } from "../components/dashboard-skeleton";
 import type { LucideIcon } from "lucide-react";
 
 const DashboardTrendChart = dynamic(
@@ -56,10 +57,14 @@ const activityIcon = {
 };
 
 export function DashboardPage() {
-  const { data, isError, isLoading } =
+  const { data, isError, isFetching, isLoading } =
     dashboardService.queries.useGetDashboard();
   const summary = data ?? emptySummary;
   const { metrics } = summary;
+
+  if (isLoading && !data) {
+    return <DashboardSkeleton />;
+  }
 
   return (
     <section className="page inner overflow-auto">
@@ -70,6 +75,11 @@ export function DashboardPage() {
             문의 유입, 처리 상태, 우선 처리 대상을 한 화면에서 확인합니다.
           </p>
         </div>
+        {isFetching ? (
+          <span className="inline-flex w-fit items-center rounded-md bg-blue-50 px-3 py-1 text-xs font-bold text-brand">
+            업데이트 중
+          </span>
+        ) : null}
       </header>
 
       {isError ? (

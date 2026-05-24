@@ -19,6 +19,7 @@ export const ticketService = createQueryService({
         fn: async (id: $Ticket.GetTicketParams) => {
           return apiClient.get<$Ticket.GetTicketResponse>(`/api/tickets/${id}`);
         },
+        options: { gcTime: 0 },
       }),
     },
   }),

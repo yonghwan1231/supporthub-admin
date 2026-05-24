@@ -9,6 +9,9 @@ export const dashboardService = createQueryService({
         fn: async () => {
           return apiClient.get<$Dashboard.SummaryResponse>("/api/dashboard");
         },
+        options: {
+          placeholderData: (previousData) => previousData,
+        },
       }),
     },
   }),

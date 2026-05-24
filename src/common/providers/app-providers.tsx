@@ -13,8 +13,6 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 0,
-            gcTime: 0,
             refetchOnWindowFocus: false,
           },
         },
