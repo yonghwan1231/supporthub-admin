@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzAOPlLh_mDN4DlCCfmT4pQ31-suibcSdouOIDaj6VHRUWPuIX24NWTyZFS5HiOJDqu/exec";
@@ -20,14 +20,11 @@ function getOrCreateSessionId() {
 
 export function RouteLogger() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const loggedPaths = useRef<Set<string>>(new Set());
 
-  const search = searchParams.toString();
-
   useEffect(() => {
+    const path = pathname;
     const hash = window.location.hash;
-    const path = search ? `${pathname}?${search}` : pathname;
 
     if (hash.includes("#dev")) return;
     if (pathname.startsWith("/portfolio-pdf")) return;
@@ -53,7 +50,7 @@ export function RouteLogger() {
       },
       body: JSON.stringify(payload),
     }).catch(() => {});
-  }, [pathname, search]);
+  }, [pathname]);
 
   return null;
 }
