@@ -15,9 +15,11 @@ type UrgentToast = $Ticket.UrgentTicketEvent & {
 export function UrgentTicketNotifier() {
   const queryClient = useQueryClient();
   const [toasts, setToasts] = useState<UrgentToast[]>([]);
+  const isRealtimeEnabled =
+    process.env.NEXT_PUBLIC_SUPPORTHUB_ENABLE_REALTIME === "true";
 
   useSse<$Ticket.RealtimeEvents>({
-    url: "/api/realtime/tickets",
+    enabled: isRealtimeEnabled,
     events: {
       "ticket.urgent": (payload) => {
         queryClient.invalidateQueries({
@@ -40,6 +42,7 @@ export function UrgentTicketNotifier() {
         }, 10000);
       },
     },
+    url: "/api/realtime/tickets",
   });
 
   if (toasts.length === 0) return null;

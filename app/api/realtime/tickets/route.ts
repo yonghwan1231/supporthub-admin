@@ -1,3 +1,4 @@
+import { isRealtimeEnabled } from "../_lib/realtime-config";
 import { subscribeTicketEvents } from "../_lib/ticket-events";
 
 export const dynamic = "force-dynamic";
@@ -6,6 +7,13 @@ export const runtime = "nodejs";
 const encoder = new TextEncoder();
 
 export async function GET(request: Request) {
+  if (!isRealtimeEnabled()) {
+    return Response.json(
+      { message: "Realtime notifications are disabled." },
+      { status: 404 },
+    );
+  }
+
   const stream = new ReadableStream({
     start(controller) {
       let closed = false;

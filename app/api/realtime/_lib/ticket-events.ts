@@ -1,3 +1,4 @@
+import { isRealtimeEnabled } from "./realtime-config";
 import { createSseEventChunk } from "./sse-format";
 
 type TicketEventSubscriber = (chunk: string) => void;
@@ -15,6 +16,10 @@ const subscribers =
 globalThis.supporthubTicketEventSubscribers = subscribers;
 
 export function subscribeTicketEvents(subscriber: TicketEventSubscriber) {
+  if (!isRealtimeEnabled()) {
+    return () => undefined;
+  }
+
   subscribers.add(subscriber);
 
   return () => {
@@ -29,6 +34,8 @@ export function publishTicketEvent({
   data: unknown;
   event: string;
 }) {
+  if (!isRealtimeEnabled()) return;
+
   const chunk = createSseEventChunk({ data, event });
 
   subscribers.forEach((subscriber) => subscriber(chunk));
