@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { ModalFrame } from "@jyh-dev/kit";
-import { PackageCheck, ShieldCheck, X } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { Button } from "@/common/components/ui/button";
 
 const INTRO_MODAL_HIDDEN_UNTIL_KEY = "supporthub:intro-modal-hidden-until";
@@ -82,6 +82,11 @@ export function ProjectIntroModal() {
             문의 목록, 문의 생성, 상세 답변, 첨부파일 업로드, 대시보드, 긴급
             문의 알림 등의 기능에 활용했습니다.
           </p>
+          <div className="rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-semibold leading-6 text-amber-900">
+            실시간 긴급 문의 알림(SSE)은 구현되어 있지만, Vercel Hobby 사용량
+            이슈로
+            <br /> 현재 배포본에서는 연결을 꺼두었습니다.
+          </div>
 
           <section>
             <h3 className="text-sm font-extrabold text-ink">
